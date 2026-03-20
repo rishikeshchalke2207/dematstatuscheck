@@ -30,8 +30,7 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
         </div>
         <div className="flex flex-col items-center py-16">
           <Loader2 size={40} className="text-grip-navy animate-spin mb-4" />
-          <p className="text-sm font-semibold text-foreground">Updating your details…</p>
-          <p className="text-xs text-muted-foreground mt-1">Checking KRA status</p>
+          <p className="text-sm font-semibold text-foreground">Verifying your details…</p>
         </div>
       </div>
     );
@@ -44,13 +43,13 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
           <div className="w-16 h-16 rounded-full bg-grip-teal/15 flex items-center justify-center mb-4">
             <CheckCircle size={32} className="text-grip-teal" />
           </div>
-          <h2 className="text-lg font-bold text-foreground mb-1">Demat Account Opened!</h2>
+          <h2 className="text-lg font-bold text-foreground mb-1">Congratulations!</h2>
           <p className="text-sm text-muted-foreground text-center leading-relaxed">
-            Your Demat has been opened successfully via Grip's depository partner. You can now invest.
+            Your Demat account with Grip has been opened.
           </p>
         </div>
         <button onClick={onDone} className="grip-cta-teal active:scale-[0.98] transition-transform">
-          Continue to Invest →
+          Continue to Invest
         </button>
       </div>
     );
@@ -184,11 +183,8 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
           <div className="w-14 h-14 rounded-full bg-grip-bg flex items-center justify-center mb-4">
             <FileText size={24} className="text-grip-navy" />
           </div>
-          <h3 className="text-base font-bold text-foreground mb-2">
-            Review & Sign Your AOF
-          </h3>
           <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-            Your Account Opening Form has been pre-filled. Review the details and e-sign to complete Demat account opening.
+            Review and sign your AOF to open a lifetime free demat account.
           </p>
 
           {/* Mock AOF preview */}
@@ -222,13 +218,13 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
         <div className="w-16 h-16 rounded-full bg-grip-teal/15 flex items-center justify-center mb-4">
           <CheckCircle size={32} className="text-grip-teal" />
         </div>
-        <h2 className="text-lg font-bold text-foreground mb-1">Application Submitted!</h2>
+        <h2 className="text-lg font-bold text-foreground mb-1">Congratulations!</h2>
         <p className="text-sm text-muted-foreground text-center leading-relaxed">
-          Your Demat account opening request has been submitted. We'll notify you once it's active.
+          Your Demat account with Grip has been opened.
         </p>
       </div>
-      <button onClick={onDone} className="grip-cta active:scale-[0.98] transition-transform">
-        Done
+      <button onClick={onDone} className="grip-cta-teal active:scale-[0.98] transition-transform">
+        Continue to Invest
       </button>
     </div>
   );

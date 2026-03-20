@@ -11,13 +11,13 @@ const options = [
   {
     key: "grip-dp",
     icon: <Building2 size={20} className="text-grip-navy" />,
-    title: "Open Grip DP",
-    desc: "Open a new Demat via Grip's depository partner",
+    title: "Open a Grip Demat Account",
+    desc: "Open a lifetime free demat account with Grip",
   },
   {
     key: "add-dp",
     icon: <Plus size={20} className="text-grip-navy" />,
-    title: "Add Another DP Account",
+    title: "Add Another Demat Account",
     desc: "Link a different active Demat you already own",
   },
   {
