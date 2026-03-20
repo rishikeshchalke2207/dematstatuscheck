@@ -9,22 +9,28 @@ import NowActiveFlow from "@/components/NowActiveFlow";
 
 type SheetView = "inactive" | "grip-dp-valid" | "grip-dp-invalid" | "add-dp" | "now-active-active" | "now-active-inactive" | null;
 
+const scenarioToSheet: Record<Scenario, SheetView> = {
+  "grip-dp-valid": "grip-dp-valid",
+  "grip-dp-invalid": "grip-dp-invalid",
+  "add-another-dp": "add-dp",
+  "now-active-active": "now-active-active",
+  "now-active-inactive": "now-active-inactive",
+};
+
 export default function Index() {
   const [scenario, setScenario] = useState<Scenario>("grip-dp-valid");
   const [sheetView, setSheetView] = useState<SheetView>(null);
 
   const handleScenarioChange = (s: Scenario) => {
     setScenario(s);
-    if (s === "grip-dp-valid") setSheetView("grip-dp-valid");
-    else if (s === "grip-dp-invalid") setSheetView("grip-dp-invalid");
-    else if (s === "add-another-dp") setSheetView("add-dp");
-    else if (s === "now-active-active") setSheetView("now-active-active");
-    else if (s === "now-active-inactive") setSheetView("now-active-inactive");
+    setSheetView(null);
   };
 
   const closeSheet = () => setSheetView(null);
 
-  const handleInvestNow = () => setSheetView("inactive");
+  const handleInvestNow = () => {
+    setSheetView(scenarioToSheet[scenario]);
+  };
 
   const renderSheetContent = () => {
     switch (sheetView) {
