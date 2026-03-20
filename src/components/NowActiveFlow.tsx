@@ -1,29 +1,55 @@
-import { useState } from "react";
-import { ArrowLeft, CheckCircle, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowLeft, CheckCircle, Loader2, XCircle } from "lucide-react";
 
 interface Props {
   onBack: () => void;
   onDone: () => void;
   onSwitchToGripDP: () => void;
   onSwitchToAddDP: () => void;
+  isActive: boolean;
 }
 
-type Status = "pending" | "active" | "inactive";
-type Step = "main" | "success";
+type Step = "loading" | "active" | "inactive";
 
-export default function NowActiveFlow({ onBack, onDone, onSwitchToGripDP, onSwitchToAddDP }: Props) {
-  const [status, setStatus] = useState<Status>("pending");
-  const [step, setStep] = useState<Step>("main");
+export default function NowActiveFlow({ onBack, onDone, onSwitchToGripDP, onSwitchToAddDP, isActive }: Props) {
+  const [step, setStep] = useState<Step>("loading");
 
-  if (step === "success") {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStep(isActive ? "active" : "inactive");
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [isActive]);
+
+  if (step === "loading") {
+    return (
+      <div className="px-5 pb-6 pt-2">
+        <div className="flex items-center gap-3 mb-5">
+          <button onClick={onBack} className="active:scale-95 transition-transform">
+            <ArrowLeft size={20} className="text-foreground" />
+          </button>
+          <h2 className="text-base font-bold text-foreground">Now It Is Active</h2>
+        </div>
+        <div className="flex flex-col items-center py-16">
+          <Loader2 size={40} className="text-grip-navy animate-spin mb-4" />
+          <p className="text-sm font-semibold text-foreground">Verifying your Demat status…</p>
+          <p className="text-xs text-muted-foreground mt-1">Checking with NSDL/CDSL</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (step === "active") {
     return (
       <div className="px-5 pb-6 pt-2">
         <div className="flex flex-col items-center py-10">
           <div className="w-16 h-16 rounded-full bg-grip-teal/15 flex items-center justify-center mb-4">
             <CheckCircle size={32} className="text-grip-teal" />
           </div>
-          <h2 className="text-lg font-bold text-foreground mb-1">UCC Activated!</h2>
-          <p className="text-sm text-muted-foreground text-center">You can now invest in bonds.</p>
+          <h2 className="text-lg font-bold text-foreground mb-1">Demat Re-verified!</h2>
+          <p className="text-sm text-muted-foreground text-center leading-relaxed">
+            Your Demat account has been confirmed as active. You can now invest in bonds.
+          </p>
         </div>
         <button onClick={onDone} className="grip-cta-teal active:scale-[0.98] transition-transform">
           Invest Now
@@ -32,6 +58,7 @@ export default function NowActiveFlow({ onBack, onDone, onSwitchToGripDP, onSwit
     );
   }
 
+  // inactive
   return (
     <div className="px-5 pb-6 pt-2">
       <div className="flex items-center gap-3 mb-5">
@@ -41,84 +68,26 @@ export default function NowActiveFlow({ onBack, onDone, onSwitchToGripDP, onSwit
         <h2 className="text-base font-bold text-foreground">Now It Is Active</h2>
       </div>
 
-      {/* Demat details */}
-      <div className="rounded-xl bg-grip-bg p-4 mb-4 space-y-2">
-        <p className="text-xs text-muted-foreground mb-2">Current Demat Details on File</p>
-        {[
-          ["DP ID", "IN302201"],
-          ["Client ID", "10847623"],
-          ["Depository", "NSDL"],
-          ["PAN", "ABCDE1234F"],
-        ].map(([label, val]) => (
-          <div key={label} className="flex justify-between">
-            <span className="text-xs text-muted-foreground">{label}</span>
-            <span className="text-xs font-semibold text-foreground">{val}</span>
-          </div>
-        ))}
-      </div>
+      <div className="flex flex-col items-center text-center py-6">
+        <div className="w-14 h-14 rounded-full bg-grip-red/15 flex items-center justify-center mb-4">
+          <XCircle size={28} className="text-grip-red" />
+        </div>
+        <h3 className="text-base font-bold text-foreground mb-2">
+          Your Demat is still inactive
+        </h3>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+          We checked with NSDL/CDSL and your Demat account is still showing as inactive. You can try one of the options below.
+        </p>
 
-      <p className="text-sm text-muted-foreground mb-4">
-        We'll verify your Demat status live against NSDL/CDSL.
-      </p>
-
-      {/* Toggle */}
-      <div className="flex rounded-xl overflow-hidden border border-grip-border mb-5">
-        <button
-          onClick={() => setStatus("active")}
-          className={`flex-1 py-2.5 text-xs font-semibold transition-colors ${
-            status === "active" ? "bg-grip-navy text-primary-foreground" : "bg-card text-foreground"
-          }`}
-        >
-          Active
-        </button>
-        <button
-          onClick={() => setStatus("inactive")}
-          className={`flex-1 py-2.5 text-xs font-semibold transition-colors ${
-            status === "inactive" ? "bg-grip-navy text-primary-foreground" : "bg-card text-foreground"
-          }`}
-        >
-          Still Inactive
-        </button>
-      </div>
-
-      {status === "active" && (
-        <>
-          <div className="rounded-xl bg-grip-teal/10 border border-grip-teal/20 p-4 mb-5">
-            <p className="text-sm text-foreground">
-              <strong>Demat confirmed active</strong> via NSDL/CDSL. UCC will be marked active in CBRICS.
-            </p>
-          </div>
-          <button onClick={() => setStep("success")} className="grip-cta-teal active:scale-[0.98] transition-transform">
-            Activate UCC & Invest →
+        <div className="w-full space-y-3">
+          <button onClick={onSwitchToGripDP} className="grip-cta active:scale-[0.98] transition-transform">
+            Open Grip DP
           </button>
-        </>
-      )}
-
-      {status === "inactive" && (
-        <>
-          <div className="rounded-xl bg-grip-red/10 border border-grip-red/20 p-4 mb-4">
-            <p className="text-sm text-foreground">
-              <strong>Your Demat is still showing as inactive.</strong>
-            </p>
-          </div>
-          <div className="rounded-xl bg-grip-amber/10 border border-grip-amber/20 p-4 mb-5">
-            <div className="flex items-start gap-2">
-              <AlertCircle size={16} className="text-grip-amber shrink-0 mt-0.5" />
-              <p className="text-xs text-foreground">
-                You cannot re-attempt "Now it is active" on the same day. Please try again tomorrow.
-              </p>
-            </div>
-          </div>
-          <div className="space-y-3">
-            <button onClick={onSwitchToGripDP} className="grip-cta-outline active:scale-[0.98] transition-transform">
-              Open Grip DP Instead
-            </button>
-            <button onClick={onSwitchToAddDP} className="grip-cta-outline active:scale-[0.98] transition-transform">
-              Add Another DP Instead
-            </button>
-          </div>
-        </>
-      )}
+          <button onClick={onSwitchToAddDP} className="grip-cta-outline active:scale-[0.98] transition-transform">
+            Add Another DP Account
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

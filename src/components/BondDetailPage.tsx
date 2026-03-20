@@ -18,7 +18,7 @@ export default function BondDetailPage({ onInvestNow }: Props) {
     "₹" + n.toLocaleString("en-IN");
 
   return (
-    <div className="bg-background min-h-screen pb-24">
+    <div className="bg-background min-h-screen pb-6">
       {/* Top Nav */}
       <div className="flex items-center justify-between px-4 py-3 bg-card">
         <ArrowLeft size={22} className="text-foreground" />
@@ -173,8 +173,8 @@ export default function BondDetailPage({ onInvestNow }: Props) {
         </div>
       </div>
 
-      {/* Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-card border-t border-grip-border">
+      {/* CTA — part of page flow */}
+      <div className="mx-4 mt-6">
         <button onClick={onInvestNow} className="grip-cta active:scale-[0.98] transition-transform">
           Invest Now
         </button>
