@@ -1,12 +1,18 @@
 import { ChevronDown } from "lucide-react";
 
-export type Scenario = "bond-detail" | "open-grip-dp" | "add-another-dp" | "now-active";
+export type Scenario =
+  | "grip-dp-valid"
+  | "grip-dp-invalid"
+  | "add-another-dp"
+  | "now-active-active"
+  | "now-active-inactive";
 
 const labels: Record<Scenario, string> = {
-  "bond-detail": "Inactive Demat Trigger",
-  "open-grip-dp": "Open Grip DP",
+  "grip-dp-valid": "Open Grip DP — KRA Valid",
+  "grip-dp-invalid": "Open Grip DP — KRA Invalid",
   "add-another-dp": "Add Another DP",
-  "now-active": "Now It Is Active",
+  "now-active-active": "Now Active — Active",
+  "now-active-inactive": "Now Active — Inactive",
 };
 
 interface Props {
