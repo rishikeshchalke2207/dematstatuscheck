@@ -218,9 +218,9 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
         <div className="w-16 h-16 rounded-full bg-grip-teal/15 flex items-center justify-center mb-4">
           <CheckCircle size={32} className="text-grip-teal" />
         </div>
-        <h2 className="text-lg font-bold text-foreground mb-1">Application Submitted!</h2>
+        <h2 className="text-lg font-bold text-foreground mb-1">Congratulations!</h2>
         <p className="text-sm text-muted-foreground text-center leading-relaxed">
-          Your Demat account opening request has been submitted. We'll notify you once it's active.
+          Your Demat account with Grip has been opened.
         </p>
       </div>
       <button onClick={onDone} className="grip-cta active:scale-[0.98] transition-transform">
