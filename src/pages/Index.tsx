@@ -10,6 +10,7 @@ import NowActiveFlow from "@/components/NowActiveFlow";
 type SheetView = "inactive" | "grip-dp-valid" | "grip-dp-invalid" | "add-dp" | "now-active-active" | "now-active-inactive" | null;
 
 const scenarioToSheet: Record<Scenario, SheetView> = {
+  "default": "inactive",
   "grip-dp-valid": "grip-dp-valid",
   "grip-dp-invalid": "grip-dp-invalid",
   "add-another-dp": "add-dp",
@@ -18,7 +19,7 @@ const scenarioToSheet: Record<Scenario, SheetView> = {
 };
 
 export default function Index() {
-  const [scenario, setScenario] = useState<Scenario>("grip-dp-valid");
+  const [scenario, setScenario] = useState<Scenario>("default");
   const [sheetView, setSheetView] = useState<SheetView>(null);
 
   const handleScenarioChange = (s: Scenario) => {

@@ -23,7 +23,7 @@ const options = [
   {
     key: "now-active",
     icon: <CheckCircle size={20} className="text-grip-teal" />,
-    title: "Now It Is Active",
+    title: "My Demat is now Active",
     desc: "My Demat is now active — verify and proceed",
   },
 ];
