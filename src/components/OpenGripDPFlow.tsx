@@ -187,21 +187,6 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
             Review and sign your AOF to open a lifetime free demat account.
           </p>
 
-          {/* Mock AOF preview */}
-          <div className="w-full rounded-xl border border-grip-border bg-card p-4 mb-6 text-left space-y-2">
-            <p className="text-xs text-muted-foreground mb-2">Account Opening Form</p>
-            {[
-              ["Name", "Rahul Sharma"],
-              ["PAN", "ABCDE1234F"],
-              ["Depository", "CDSL (via Grip)"],
-              ["Account Type", "Beneficiary"],
-            ].map(([label, val]) => (
-              <div key={label} className="flex justify-between">
-                <span className="text-xs text-muted-foreground">{label}</span>
-                <span className="text-xs font-semibold text-foreground">{val}</span>
-              </div>
-            ))}
-          </div>
 
           <button onClick={() => setStep("submitted")} className="grip-cta active:scale-[0.98] transition-transform">
             E-Sign & Submit
