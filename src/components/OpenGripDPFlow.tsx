@@ -183,11 +183,8 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
           <div className="w-14 h-14 rounded-full bg-grip-bg flex items-center justify-center mb-4">
             <FileText size={24} className="text-grip-navy" />
           </div>
-          <h3 className="text-base font-bold text-foreground mb-2">
-            Review & Sign Your AOF
-          </h3>
           <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-            Your Account Opening Form has been pre-filled. Review the details and e-sign to complete Demat account opening.
+            Review and sign your AOF to open a lifetime free demat account.
           </p>
 
           {/* Mock AOF preview */}
