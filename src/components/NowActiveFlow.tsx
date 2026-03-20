@@ -48,7 +48,7 @@ export default function NowActiveFlow({ onBack, onDone, onSwitchToGripDP, onSwit
           </div>
           <h2 className="text-lg font-bold text-foreground mb-1">Demat Re-verified!</h2>
           <p className="text-sm text-muted-foreground text-center leading-relaxed">
-            Your Demat account has been confirmed as active. You can now invest in bonds.
+            Your Demat account has been confirmed as active. You can now invest now.
           </p>
         </div>
         <button onClick={onDone} className="grip-cta-teal active:scale-[0.98] transition-transform">
