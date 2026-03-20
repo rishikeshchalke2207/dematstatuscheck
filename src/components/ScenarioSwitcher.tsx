@@ -1,6 +1,7 @@
 import { ChevronDown } from "lucide-react";
 
 export type Scenario =
+  | "default"
   | "grip-dp-valid"
   | "grip-dp-invalid"
   | "add-another-dp"
@@ -8,6 +9,7 @@ export type Scenario =
   | "now-active-inactive";
 
 const labels: Record<Scenario, string> = {
+  "default": "Default — Demat Inactive",
   "grip-dp-valid": "Open Grip DP — KRA Valid",
   "grip-dp-invalid": "Open Grip DP — KRA Invalid",
   "add-another-dp": "Add Another DP",
