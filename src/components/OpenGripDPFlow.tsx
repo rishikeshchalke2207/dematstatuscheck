@@ -30,8 +30,7 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
         </div>
         <div className="flex flex-col items-center py-16">
           <Loader2 size={40} className="text-grip-navy animate-spin mb-4" />
-          <p className="text-sm font-semibold text-foreground">Updating your details…</p>
-          <p className="text-xs text-muted-foreground mt-1">Checking KRA status</p>
+          <p className="text-sm font-semibold text-foreground">Verifying your details…</p>
         </div>
       </div>
     );
