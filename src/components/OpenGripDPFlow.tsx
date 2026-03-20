@@ -223,8 +223,8 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
           Your Demat account with Grip has been opened.
         </p>
       </div>
-      <button onClick={onDone} className="grip-cta active:scale-[0.98] transition-transform">
-        Done
+      <button onClick={onDone} className="grip-cta-teal active:scale-[0.98] transition-transform">
+        Continue to Invest
       </button>
     </div>
   );

@@ -19,10 +19,10 @@ export default function AddAnotherDPFlow({ onBack }: Props) {
           <ExternalLink size={24} className="text-foreground" />
         </div>
         <h3 className="text-base font-bold text-foreground mb-2">
-          You'll be redirected to our Demat Update Form
+          You will be redirected to sign the Demat modification form
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed mb-8">
-          Fill in your new Demat details on the form. Once submitted, Compliance will verify and activate your UCC — usually within 1–2 business days.
+          Fill in your new Demat details on the form. Once submitted, our team will verify your details within 1–2 business days.
         </p>
 
         <a
