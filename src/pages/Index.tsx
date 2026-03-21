@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ScenarioSwitcher, { type Scenario } from "@/components/ScenarioSwitcher";
 import BondDetailPage from "@/components/BondDetailPage";
 import BottomSheet from "@/components/BottomSheet";
@@ -24,7 +24,8 @@ export default function Index() {
 
   const handleScenarioChange = (s: Scenario) => {
     setScenario(s);
-    setSheetView(null);
+    // Auto-open the corresponding sheet when scenario changes
+    setSheetView(scenarioToSheet[s]);
   };
 
   const closeSheet = () => setSheetView(null);
@@ -33,12 +34,20 @@ export default function Index() {
     setSheetView(scenarioToSheet[scenario]);
   };
 
+  // For non-default scenarios, the DematInactiveSheet options should route to the selected scenario's flow
+  const getGripDPHandler = () => {
+    if (scenario === "grip-dp-valid" || scenario === "grip-dp-invalid") {
+      return () => setSheetView(scenarioToSheet[scenario]);
+    }
+    return () => setSheetView("grip-dp-valid");
+  };
+
   const renderSheetContent = () => {
     switch (sheetView) {
       case "inactive":
         return (
           <DematInactiveSheet
-            onOpenGripDP={() => setSheetView("grip-dp-valid")}
+            onOpenGripDP={getGripDPHandler()}
             onAddAnotherDP={() => setSheetView("add-dp")}
             onNowActive={() => setSheetView("now-active-active")}
             onMaybeLater={closeSheet}
@@ -76,12 +85,14 @@ export default function Index() {
   };
 
   return (
-    <div className="max-w-md mx-auto min-h-screen bg-background relative">
-      <ScenarioSwitcher current={scenario} onChange={handleScenarioChange} />
-      <BondDetailPage onInvestNow={handleInvestNow} />
-      <BottomSheet open={sheetView !== null} onClose={closeSheet}>
-        {renderSheetContent()}
-      </BottomSheet>
+    <div className="min-h-screen bg-muted flex items-start justify-center">
+      <div className="w-full max-w-[430px] min-h-screen bg-background relative shadow-2xl">
+        <ScenarioSwitcher current={scenario} onChange={handleScenarioChange} />
+        <BondDetailPage onInvestNow={handleInvestNow} />
+        <BottomSheet open={sheetView !== null} onClose={closeSheet}>
+          {renderSheetContent()}
+        </BottomSheet>
+      </div>
     </div>
   );
 }
