@@ -24,22 +24,28 @@ export default function Index() {
 
   const handleScenarioChange = (s: Scenario) => {
     setScenario(s);
-    // Auto-open the corresponding sheet when scenario changes
-    setSheetView(scenarioToSheet[s]);
+    // Always open the 3-option sheet first
+    setSheetView("inactive");
   };
 
   const closeSheet = () => setSheetView(null);
 
   const handleInvestNow = () => {
-    setSheetView(scenarioToSheet[scenario]);
+    // Always show the 3-option sheet first
+    setSheetView("inactive");
   };
 
-  // For non-default scenarios, the DematInactiveSheet options should route to the selected scenario's flow
+  // Route "Open Grip DP" click based on selected scenario
   const getGripDPHandler = () => {
-    if (scenario === "grip-dp-valid" || scenario === "grip-dp-invalid") {
-      return () => setSheetView(scenarioToSheet[scenario]);
-    }
-    return () => setSheetView("grip-dp-valid");
+    if (scenario === "grip-dp-valid") return () => setSheetView("grip-dp-valid");
+    if (scenario === "grip-dp-invalid") return () => setSheetView("grip-dp-invalid");
+    return () => setSheetView("grip-dp-valid"); // default
+  };
+
+  // Route "My Demat is now Active" click based on selected scenario
+  const getNowActiveHandler = () => {
+    if (scenario === "now-active-inactive") return () => setSheetView("now-active-inactive");
+    return () => setSheetView("now-active-active"); // default
   };
 
   const renderSheetContent = () => {
