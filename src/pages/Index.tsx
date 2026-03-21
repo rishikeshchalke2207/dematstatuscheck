@@ -20,7 +20,7 @@ const scenarioToSheet: Record<Scenario, SheetView> = {
 
 export default function Index() {
   const [scenario, setScenario] = useState<Scenario>("default");
-  const [sheetView, setSheetView] = useState<SheetView>(null);
+  const [sheetView, setSheetView] = useState<SheetView>("inactive");
 
   const handleScenarioChange = (s: Scenario) => {
     setScenario(s);
