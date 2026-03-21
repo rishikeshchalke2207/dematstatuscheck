@@ -55,7 +55,7 @@ export default function Index() {
           <DematInactiveSheet
             onOpenGripDP={getGripDPHandler()}
             onAddAnotherDP={() => setSheetView("add-dp")}
-            onNowActive={() => setSheetView("now-active-active")}
+            onNowActive={getNowActiveHandler()}
             onMaybeLater={closeSheet}
           />
         );
