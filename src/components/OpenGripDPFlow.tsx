@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, CheckCircle, Loader2, Camera, FileText } from "lucide-react";
+import { ArrowLeft, CheckCircle, Loader2, Camera, FileText, AlertCircle } from "lucide-react";
 
 interface Props {
   onBack: () => void;
