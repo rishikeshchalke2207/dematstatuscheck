@@ -210,7 +210,7 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
   );
 }
 
-function SuccessScreen({ onDone }: { onDone: () => void }) {
+function ConsentScreen({ onBack, onProceed }: { onBack: () => void; onProceed: () => void }) {
   const [agreed, setAgreed] = useState(true);
   const [showError, setShowError] = useState(false);
 
@@ -219,18 +219,25 @@ function SuccessScreen({ onDone }: { onDone: () => void }) {
       setShowError(true);
       return;
     }
-    onDone();
+    onProceed();
   };
 
   return (
     <div className="px-5 pb-6 pt-2">
-      <div className="flex flex-col items-center py-10">
-        <div className="w-16 h-16 rounded-full bg-grip-teal/15 flex items-center justify-center mb-4">
-          <CheckCircle size={32} className="text-grip-teal" />
+      <div className="flex items-center gap-3 mb-5">
+        <button onClick={onBack} className="active:scale-95 transition-transform">
+          <ArrowLeft size={20} className="text-foreground" />
+        </button>
+        <h2 className="text-base font-bold text-foreground">Open Grip DP</h2>
+      </div>
+
+      <div className="flex flex-col items-center py-6 text-center">
+        <div className="w-14 h-14 rounded-full bg-grip-navy/10 flex items-center justify-center mb-4">
+          <FileText size={24} className="text-grip-navy" />
         </div>
-        <h2 className="text-lg font-bold text-foreground mb-1">Congratulations!</h2>
-        <p className="text-sm text-muted-foreground text-center leading-relaxed">
-          Your Demat account with Grip has been opened.
+        <h3 className="text-base font-bold text-foreground mb-2">Open a Grip Demat Account</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+          We'll verify your KRA details and open a lifetime free demat account with Grip.
         </p>
       </div>
 
@@ -253,7 +260,26 @@ function SuccessScreen({ onDone }: { onDone: () => void }) {
         </div>
       )}
 
-      <button onClick={handleContinue} className="grip-cta-teal active:scale-[0.98] transition-transform">
+      <button onClick={handleContinue} className="grip-cta active:scale-[0.98] transition-transform">
+        Continue
+      </button>
+    </div>
+  );
+}
+
+function SuccessDone({ onDone }: { onDone: () => void }) {
+  return (
+    <div className="px-5 pb-6 pt-2">
+      <div className="flex flex-col items-center py-10">
+        <div className="w-16 h-16 rounded-full bg-grip-teal/15 flex items-center justify-center mb-4">
+          <CheckCircle size={32} className="text-grip-teal" />
+        </div>
+        <h2 className="text-lg font-bold text-foreground mb-1">Congratulations!</h2>
+        <p className="text-sm text-muted-foreground text-center leading-relaxed">
+          Your Demat account with Grip has been opened.
+        </p>
+      </div>
+      <button onClick={onDone} className="grip-cta-teal active:scale-[0.98] transition-transform">
         Continue to Invest
       </button>
     </div>
