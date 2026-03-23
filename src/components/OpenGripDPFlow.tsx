@@ -7,17 +7,19 @@ interface Props {
   kraValid: boolean;
 }
 
-type Step = "loading" | "success" | "need-details" | "selfie" | "signing" | "submitted";
+type Step = "consent" | "loading" | "success" | "need-details" | "selfie" | "signing" | "submitted";
 
 export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
-  const [step, setStep] = useState<Step>("loading");
+  const [step, setStep] = useState<Step>(kraValid ? "consent" : "loading");
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setStep(kraValid ? "success" : "need-details");
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [kraValid]);
+    if (step === "loading") {
+      const timer = setTimeout(() => {
+        setStep(kraValid ? "success" : "need-details");
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [kraValid, step]);
 
   if (step === "loading") {
     return (
