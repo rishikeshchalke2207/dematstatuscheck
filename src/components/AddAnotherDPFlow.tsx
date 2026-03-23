@@ -19,8 +19,12 @@ export default function AddAnotherDPFlow({ onBack }: Props) {
           <ExternalLink size={24} className="text-foreground" />
         </div>
         <h3 className="text-base font-bold text-foreground mb-2">
-          You will be redirected to sign the Demat modification form
+          Your current Demat account details are as follows
         </h3>
+        <div className="w-full rounded-xl bg-grip-bg p-3 mb-4">
+          <p className="text-xs text-muted-foreground">BO-ID</p>
+          <p className="text-sm font-semibold text-foreground font-mono">1234567829102910</p>
+        </div>
         <p className="text-sm text-muted-foreground leading-relaxed mb-8">
           Fill in your new Demat details on the form. Once submitted, our team will verify your details within 1–2 business days.
         </p>

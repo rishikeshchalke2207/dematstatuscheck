@@ -203,3 +203,53 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
     </div>
   );
 }
+
+function SuccessScreen({ onDone }: { onDone: () => void }) {
+  const [agreed, setAgreed] = useState(true);
+  const [showError, setShowError] = useState(false);
+
+  const handleContinue = () => {
+    if (!agreed) {
+      setShowError(true);
+      return;
+    }
+    onDone();
+  };
+
+  return (
+    <div className="px-5 pb-6 pt-2">
+      <div className="flex flex-col items-center py-10">
+        <div className="w-16 h-16 rounded-full bg-grip-teal/15 flex items-center justify-center mb-4">
+          <CheckCircle size={32} className="text-grip-teal" />
+        </div>
+        <h2 className="text-lg font-bold text-foreground mb-1">Congratulations!</h2>
+        <p className="text-sm text-muted-foreground text-center leading-relaxed">
+          Your Demat account with Grip has been opened.
+        </p>
+      </div>
+
+      <label className="flex items-start gap-3 mb-3 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={agreed}
+          onChange={(e) => { setAgreed(e.target.checked); setShowError(false); }}
+          className="mt-0.5 h-4 w-4 rounded border-grip-border accent-grip-navy shrink-0"
+        />
+        <span className="text-xs text-muted-foreground leading-relaxed">
+          By ticking this checkbox, you agree to delete your current demat details from the platform.
+        </span>
+      </label>
+
+      {showError && (
+        <div className="flex items-center gap-2 mb-3 px-1">
+          <AlertCircle size={14} className="text-destructive shrink-0" />
+          <p className="text-xs text-destructive">Please tick the checkbox to proceed.</p>
+        </div>
+      )}
+
+      <button onClick={handleContinue} className="grip-cta-teal active:scale-[0.98] transition-transform">
+        Continue to Invest
+      </button>
+    </div>
+  );
+}
