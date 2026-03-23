@@ -38,8 +38,12 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
     );
   }
 
+  if (step === "consent") {
+    return <ConsentScreen onBack={onBack} onProceed={() => setStep("loading")} />;
+  }
+
   if (step === "success") {
-    return <SuccessScreen onDone={onDone} />;
+    return <SuccessDone onDone={onDone} />;
   }
 
   if (step === "need-details") {
