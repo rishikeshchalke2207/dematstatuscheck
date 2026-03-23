@@ -83,6 +83,10 @@ export default function OpenGripDPFlow({ onBack, onDone, kraValid }: Props) {
             </div>
           </div>
 
+          <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+            By clicking on continue, you agree to delete your current demat details from the platform.
+          </p>
+
           <button onClick={() => setStep("selfie")} className="grip-cta active:scale-[0.98] transition-transform">
             Continue
           </button>
